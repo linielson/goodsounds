@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/linielson/goodsounds/schemas"
+	"github.com/linielson/goodsounds/internal/entity"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"os"
@@ -9,7 +9,7 @@ import (
 
 func InitializeSQLite() (*gorm.DB, error) {
 	logger := GetLogger("sqlite")
-	dbFolderPath := "./../../db"
+	dbFolderPath := "./db"
 	dbPath := dbFolderPath + "/main.db"
 	_, err := os.Stat(dbPath)
 	if os.IsNotExist(err) {
@@ -35,7 +35,7 @@ func InitializeSQLite() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	err = db.AutoMigrate(&schemas.Playlist{})
+	err = db.AutoMigrate(&entity.Playlist{})
 	if err != nil {
 		logger.Errorf("sqlite automigration error: %v", err)
 		return nil, err
