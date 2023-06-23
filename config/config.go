@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/go-chi/jwtauth"
 	"github.com/spf13/viper"
+	"gorm.io/gorm"
 )
 
 type conf struct {
@@ -21,6 +22,7 @@ type conf struct {
 
 var (
 	config *conf
+	db     *gorm.DB
 )
 
 // Its executed before the main func
@@ -29,6 +31,10 @@ func Init() error {
 	config, err = loadConfig()
 	if err != nil {
 		return fmt.Errorf("error loading config: ", err)
+	}
+	db, err = InitializeSQLite()
+	if err != nil {
+		return fmt.Errorf("error initializing sqlite: ", err)
 	}
 	return nil
 }
@@ -63,4 +69,8 @@ func GetJwtExpiresIn() int {
 func GetLogger(p string) *Logger {
 	logger := NewLogger(p)
 	return logger
+}
+
+func GetSQLite() *gorm.DB {
+	return db
 }

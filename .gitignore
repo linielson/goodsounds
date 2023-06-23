@@ -1,2 +1,21 @@
 #env file
 .env
+
+# Binaries
+
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test Binary
+
+*.test
+
+# Coverage
+
+*.out
+
+#Db folder
+
+db/
