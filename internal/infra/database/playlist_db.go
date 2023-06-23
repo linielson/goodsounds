@@ -30,3 +30,9 @@ func (p *Playlist) FindAll(page, limit int, sort string) ([]entity.Playlist, err
 	}
 	return playlists, err
 }
+
+func (p *Playlist) FindByID(id string) (*entity.Playlist, error) {
+	var playlist entity.Playlist
+	err := p.DB.First(&playlist, "id = ?", id).Error
+	return &playlist, err
+}

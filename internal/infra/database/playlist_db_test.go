@@ -62,3 +62,22 @@ func TestFinalAllPlaylists(t *testing.T) {
 	assert.Equal(t, "Playlist 21", playlists[0].Title)
 	assert.Equal(t, "Playlist 23", playlists[2].Title)
 }
+
+func TestFindPlaylistByID(t *testing.T) {
+	db, err := gorm.Open(sqlite.Open("file::memory:"), &gorm.Config{})
+	if err != nil {
+		t.Error(err)
+	}
+	err = db.AutoMigrate(&entity.Playlist{})
+	if err != nil {
+		t.Error(err)
+	}
+	dataPlaylist := dto.Playlist{Title: "Playlist 1", Location: "Italy", Latitude: "45.468016", Longitude: "9.186114"}
+	playlist, err := entity.NewPlaylist(dataPlaylist)
+	assert.NoError(t, err)
+	db.Create(playlist)
+	playlistDB := NewPlaylist(db)
+	playlist, err = playlistDB.FindByID(playlist.ID.String())
+	assert.NoError(t, err)
+	assert.Equal(t, "Playlist 1", playlist.Title)
+}
