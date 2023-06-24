@@ -36,3 +36,12 @@ func (p *Playlist) FindByID(id string) (*entity.Playlist, error) {
 	err := p.DB.First(&playlist, "id = ?", id).Error
 	return &playlist, err
 }
+
+func (p *Playlist) Update(playlist *entity.Playlist) error {
+	_, err := p.FindByID(playlist.ID.String())
+	if err != nil {
+		return err
+	}
+	return p.DB.Save(playlist).Error
+}
+
