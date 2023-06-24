@@ -45,3 +45,10 @@ func (p *Playlist) Update(playlist *entity.Playlist) error {
 	return p.DB.Save(playlist).Error
 }
 
+func (p *Playlist) Delete(id string) error {
+	playlist, err := p.FindByID(id)
+	if err != nil {
+		return err
+	}
+	return p.DB.Delete(playlist).Error
+}
