@@ -15,4 +15,6 @@ func main() {
 		logger.Errorf("config initialization error: %v", err)
 		return
 	}
+	logger.Infof("test: %v", config.GetTokenAuth())
+	logger.Infof("test2: %v", config.GetJwtExpiresIn())
 }

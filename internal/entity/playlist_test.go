@@ -53,3 +53,5 @@ func TestPlaylistValidate(t *testing.T) {
 	assert.NotNil(t, playlist)
 	assert.Nil(t, playlist.Validate())
 }
+
+// Create Test for ID invalid, use mock. Check the coverage

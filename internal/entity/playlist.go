@@ -26,6 +26,7 @@ type Playlist struct {
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 	DeletedAt time.Time `json:"deleted_at"`
+	//Musics    []Music
 }
 
 func NewPlaylist(playlist dto.Playlist) (*Playlist, error) {

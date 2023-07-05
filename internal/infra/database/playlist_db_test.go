@@ -121,7 +121,8 @@ func TestDeletePlaylist(t *testing.T) {
 
 	err = playlistDB.Delete(playlist.ID.String())
 	assert.NoError(t, err)
-
 	_, err = playlistDB.FindByID(playlist.ID.String())
 	assert.Error(t, err)
 }
+
+//fix coverage
